@@ -1,96 +1,112 @@
 import React from 'react'
-import { Box, Heading, AspectRatio, Image, Text, Center, HStack, Stack, NativeBaseProvider } from 'native-base'
+import { Box, Heading, AspectRatio, Image, Text, Center, Row, Stack, NativeBaseProvider, FlatList } from 'native-base'
 import { ImageBackground } from 'react-native'
 import { StyleSheet } from 'react-native'
+import { FontAwesome } from '@expo/vector-icons'
 
 export default function CardView(props: any) {
+	var imagesData = [
+		{
+			source: require('../assets/images/unknown.png'),
+		},
+		{
+			source: require('../assets/images/unknown2.png'),
+		},
+		{
+			source: require('../assets/images/unknown3.png'),
+		},
+		{
+			source: require('../assets/images/unknown4.png'),
+		},
+		{
+			source: require('../assets/images/unknown5.png'),
+		},
+		{
+			source: require('../assets/images/unknown6.png'),
+		},
+	]
+
+	var renderImageData = ({ item }) => (
+		<Box
+			style={{
+				shadowOffset: {
+					width: 0,
+					height: 3,
+				},
+				shadowOpacity: 0.6,
+				shadowRadius: 4,
+			}}>
+			<Image source={item.source} rounded='md' alt='image' mx={1} style={[styles.imageThumbnail]} flexGrow={1} />
+		</Box>
+	)
+
 	return (
 		<Box style={styles.card}>
 			<Box width='100%' rounded='lg' overflow='hidden'>
-				<Box>
-					<Box backgroundColor='black'>
-						<ImageBackground
-							source={require('../assets/images/unknown.png')}
-							alt='image'
-							blurRadius={5}
-							opacity={0.5}
-							backgroundColor='black'>
-							<Stack my='4' mx='2' space={3}>
-								<HStack space={2} justifyContent='space-between'>
-									<Heading size='xs' mt='-1' style={[styles.title, { fontSize: 25 }]}>
-										Shivery Abyss
-									</Heading>
-									<Text fontSize='xs' style={styles.text} ml='-0.5' mt='-3'>
-										47°4' 48.4298"N{'\n'}
-										17°59' 0.3034"E
-									</Text>
-								</HStack>
-								<Center>
-									<Text style={[styles.text, { fontSize: 18 }]}>Captured at 2022-01-07 by</Text>
-									<Text fontSize='xs' style={[styles.text, { fontSize: 14 }]} mb='2'>
-										PSI497 and Ketavin_SBE
-									</Text>
-									<HStack rounded='md' width={'100%'} justifyContent='space-evenly' mb={3}>
-										<Image
-											source={require('../assets/images/unknown.png')}
-											rounded='md'
-											alt='image'
-											style={[styles.imageThumbnail]}
-											flex={0.31}></Image>
-										<Image
-											source={require('../assets/images/unknown2.png')}
-											rounded='md'
-											alt='image'
-											style={[styles.imageThumbnail]}
-											flex={0.31}></Image>
-										<Image
-											source={require('../assets/images/unknown3.png')}
-											rounded='md'
-											alt='image'
-											style={[styles.imageThumbnail]}
-											flex={0.31}></Image>
-									</HStack>
-									<Text style={[styles.text, { fontSize: 18 }]}>Deployed at 2021-11-14 by</Text>
-									<Text fontSize='xs' style={[styles.text, { fontSize: 14 }]} mb='2'>
-										Explrrr, Adventur34 and TimmyTommy123
-									</Text>
-									<HStack rounded='md' width={'100%'} justifyContent='space-evenly'>
-										<Image
-											source={require('../assets/images/unknown4.png')}
-											rounded='md'
-											alt='image'
-											style={[styles.imageThumbnail]}
-											flex={0.31}></Image>
-										<Image
-											source={require('../assets/images/unknown5.png')}
-											rounded='md'
-											alt='image'
-											style={[styles.imageThumbnail]}
-											flex={0.31}></Image>
-										<Image
-											source={require('../assets/images/unknown6.png')}
-											rounded='md'
-											alt='image'
-											style={[styles.imageThumbnail]}
-											flex={0.31}></Image>
-									</HStack>
-								</Center>
-								<HStack alignItems='center' space={4} justifyContent='space-between'>
-									<HStack alignItems='center'>
-										{/* <Text
-											color='coolGray.600'
-											_dark={{
-												color: 'warmGray.200',
-											}}
-											fontWeight='400'>
-											6 mins ago
-										</Text> */}
-									</HStack>
-								</HStack>
-							</Stack>
-						</ImageBackground>
-					</Box>
-					{/* <Center
+				<Box backgroundColor='black'>
+					<ImageBackground
+						source={require('../assets/images/unknown.png')}
+						alt='image'
+						blurRadius={5}
+						opacity={0.5}
+						backgroundColor='black'>
+						<Stack my='1' mx='2' space={3}>
+							<Row space={2} justifyContent='space-between'>
+								<Heading size='lg' style={[styles.text, styles.title, { fontSize: 25 }]}>
+									Shivery Abyss
+								</Heading>
+								<Text fontSize='xs' style={styles.text}>
+									47°4' 48.4298"N{'\n'}
+									17°59' 0.3034"E
+								</Text>
+							</Row>
+							<Center>
+								<Row width={'100%'} justifyContent='center'>
+									<Center>
+										<Text style={[styles.text, { fontSize: 18 }]}>Captured at 2022-01-07 by</Text>
+										<Text fontSize='sm' style={[styles.text]} mb='2'>
+											PSI497 and Ketavin_SBE
+										</Text>
+									</Center>
+									<FontAwesome
+										name={'edit'}
+										style={[
+											styles.text,
+											{ fontSize: 30, textAlign: 'right', alignSelf: 'center', right: 2, position: 'absolute' },
+										]}
+									/>
+								</Row>
+								<Row width={'100%'} mb={3}>
+									<FlatList
+										data={imagesData}
+										renderItem={renderImageData}
+										keyExtractor={(item) => item.source}
+										horizontal={true}
+										width={'100%'}
+										contentContainerStyle={{ marginBottom: 10 }}
+										indicatorStyle='white'
+									/>
+								</Row>
+								<Text style={[styles.text, { fontSize: 18 }]}>Deployed at 2021-11-14 by</Text>
+								<Text fontSize='sm' style={[styles.text]} mb='2'>
+									Explrrr, Adventur34 and TimmyTommy123
+								</Text>
+								<Row rounded='md' mb={3} width={'100%'} justifyContent='space-evenly'>
+									<FlatList
+										data={imagesData}
+										renderItem={renderImageData}
+										keyExtractor={(item) => item.source}
+										horizontal={true}
+										width={'100%'}
+										contentContainerStyle={{ marginBottom: 10 }}
+										indicatorStyle='white'
+									/>
+								</Row>
+							</Center>
+						</Stack>
+					</ImageBackground>
+				</Box>
+				{/* <Center
 						bg='violet.500'
 						_dark={{
 							bg: 'violet.400',
@@ -106,7 +122,6 @@ export default function CardView(props: any) {
 						py='1.5'>
 						PHOTOS
 					</Center> */}
-				</Box>
 			</Box>
 		</Box>
 	)
@@ -123,20 +138,17 @@ const styles = StyleSheet.create({
 		fontFamily: font,
 	},
 	title: {
-		fontSize: 20,
 		fontWeight: 'bold',
-		color: '#DEDEDE',
-		fontFamily: font,
 	},
 	text: {
 		color: '#DEDEDE',
 		fontFamily: font,
 		shadowOffset: {
-			width: 3,
-			height: 3,
+			width: 2,
+			height: 2,
 		},
-		shadowOpacity: 0.6,
-		shadowRadius: 3,
+		shadowOpacity: 1,
+		shadowRadius: 1,
 	},
 	card: {
 		shadowOffset: {
@@ -150,13 +162,7 @@ const styles = StyleSheet.create({
 	},
 	imageThumbnail: {
 		resizeMode: 'cover',
-		width: 75,
-		height: 75,
-		shadowOffset: {
-			width: 3,
-			height: 3,
-		},
-		shadowOpacity: 0.6,
-		shadowRadius: 3,
+		width: 100,
+		height: 100,
 	},
 })

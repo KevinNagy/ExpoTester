@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native'
 
 import EditScreenInfo from '../components/EditScreenInfo'
 import { RootTabScreenProps } from '../types'
-import { Box, Heading, AspectRatio, Image, Text, Center, HStack, Stack, NativeBaseProvider } from 'native-base'
+import { Box, Heading, AspectRatio, Image, Text, Center, Row, Stack, NativeBaseProvider } from 'native-base'
 import CardView from '../components/CardView'
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
